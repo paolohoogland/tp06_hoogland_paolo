@@ -1,0 +1,15 @@
+<h1>Mon Panier</h1>
+
+<div *ngIf="(panier$ | async) as panier">
+  <div *ngIf="hasItems(panier); else emptyPanier">
+    <div *ngFor="let produit of panier" class="produitInPanier">
+      <p>{{ produit.product }} - {{ produit.price | currency }}</p>
+      <p>{{ produit.description }}</p>
+      <button (click)="retirerDuPanier(produit.id || '')">Retirer du Panier</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyPanier>
+  <p>Panier vide</p>
+</ng-template>
