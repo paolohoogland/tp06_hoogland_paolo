@@ -3,5 +3,9 @@
   <nav>
     <a routerLink="/produits">Catalogue</a> | 
     <a routerLink="/panier">Panier ({{ nbProduits$ | async }} items)</a>
+    <a routerLink="/login" class="login-link">Se connecter</a> 
+    <!-- next step is here : 
+     change this code so that if im logged in and the json webtoken exists i can go to "Mon compte", if im not logged in and the json webtoken doesnt exist then i can go to "se connecter"
+    -->
   </nav>
 </header>

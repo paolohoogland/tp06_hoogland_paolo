@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class ProduitService {
-  private backendUrl = environment.backendClient;
+  private backendUrl = environment.backendProducts;
 
   constructor(private http: HttpClient) {}
 

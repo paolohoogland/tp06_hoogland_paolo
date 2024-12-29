@@ -9,8 +9,22 @@ header {
 
 header a {
     color: white;
+    text-decoration: none;
+    margin: 0 10px;
 }
 
 header a:hover {
     color: #f0f0f02a;
+}
+
+header .login-link {
+    background-color: #007bff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+header .login-link:hover {
+    background-color: #0056b3;
+    color: white;
 }

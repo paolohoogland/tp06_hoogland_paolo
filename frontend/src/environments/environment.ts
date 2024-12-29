@@ -1,4 +1,5 @@
 export const environment = {
     production: false,
-    backendClient : "http://localhost:443/api/products",
+    backendProducts : "http://localhost:443/api/products",
+    backendUsers : "http://localhost:443/api/users",  
   };
