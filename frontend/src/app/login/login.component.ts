@@ -22,11 +22,13 @@ export class LoginComponent {
   onLogin(): void {
     this.authService.login(this.username, this.password).subscribe({
       next: (response) => {
+        console.log('received token: ' + response.token);
+
         this.authService.storeToken(response.token);
         this.router.navigate(['/produits']);
       },
       error: (err) => {
-        this.errorMessage = 'Invalid username or password';
+        this.errorMessage = 'Invalid username or password !';
       }
     });
   }

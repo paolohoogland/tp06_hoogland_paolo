@@ -38,6 +38,7 @@ router.post('/login', (req, res) => {
       expiresIn: '1h'
     });
 
+    console.log('JWT Token:', token);
     res.json({ token });
   });
 });
@@ -64,5 +65,32 @@ router.post('/register', (req, res) => {
     res.status(201).json({ message: 'User registered successfully' });
   });
 });
+
+router.put('/update', (req, res) => {
+  const { username, password } = req.body;
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if (!token) return res.status(401).json({ message: 'Unauthorized' });
+
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    if (err) return res.status(403).json({ message: 'Invalid token' });
+
+    const user = users.find(u => u.id === decoded.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    user.username = username || user.username;
+
+    if (password) {
+      bcrypt.hash(password, 10, (err, hashedPassword) => {
+        if (err) return res.status(500).json({ message: 'Password hashing failed' });
+        user.password = hashedPassword;
+        res.json({ message: 'User updated successfully' });
+      });
+    } else {
+      res.json({ message: 'User updated successfully' });
+    }
+  });
+});
+
 
 module.exports = router;

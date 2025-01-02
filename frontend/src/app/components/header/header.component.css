@@ -1,3 +1,4 @@
+/* General header styling */
 header {
     display: flex;
     justify-content: space-between;
@@ -5,26 +6,74 @@ header {
     padding: 10px 20px;
     background-color: #bb239d;
     color: white;
+    font-family: Arial, sans-serif;
 }
 
+/* Logo/Title Styling */
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* Navigation container */
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Navigation links */
 header a {
     color: white;
     text-decoration: none;
-    margin: 0 10px;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
 }
 
 header a:hover {
-    color: #f0f0f02a;
+    color: #f0f0f0;
 }
 
+/* Special styling for the login link */
 header .login-link {
     background-color: #007bff;
     padding: 5px 10px;
     border-radius: 5px;
     font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header .login-link:hover {
     background-color: #0056b3;
     color: white;
+}
+
+/* Special styling for the 'Mon compte' link */
+header .account-link {
+    background-color: #28a745;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header .account-link:hover {
+    background-color: #1e7e34;
+    color: white;
+}
+
+/* Logout Button */
+header button {
+    background-color: #dc3545;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+header button:hover {
+    background-color: #c82333;
 }
