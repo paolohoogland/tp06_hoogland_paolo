@@ -6,26 +6,24 @@ const configJSON = require('../config.json');
 const JWT_SECRET = configJSON.jwtSecret;
 
 const ACCESS_TOKEN_EXPIRATION = '15m';
-const REFRESH_TOKEN_EXPIRATION = '7d';
 
-const generateAccessToken = (user) => {
+const generateToken = (user) => {
     const payload = {
         id: user.id,
         username: user.username,
         issuedAt: Date.now()
     };
 
-    const accessToken = jwt.sign(payload, JWT_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRATION });
-    const refreshToken = jwt.sign(payload, JWT_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRATION });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRATION });
 
-    return { accessToken, refreshToken };
+    return token;
 };
 
 exports.getUsers = (req, res) => {
     res.send(users);
 }
 
-exports.login = async (req, res) => { // check async
+exports.login = async (req, res) => {
     const { username, password } = req.body;
 
     const user = users.find(u => u.username === username);
@@ -38,8 +36,8 @@ exports.login = async (req, res) => { // check async
         return res.status(401).json({ error: 'Invalid password' });
     }
 
-    const { accessToken, refreshToken } = generateAccessToken(user);
-    res.json({ accessToken, refreshToken });
+    const token = generateToken(user);
+    res.json({ token });
 }
 
 exports.register = async (req, res) => {

@@ -22,16 +22,7 @@ export class LoginComponent {
   onLogin(): void {
     this.authService.login(this.username, this.password).subscribe({
       next: (response) => {
-        // console.log('received token: ' + response.token);
-        // -> now receiving accesstoken & refreshtoken
-        console.log('received accessToken: ' + response.accessToken);
-        console.log('received refreshToken: ' + response.refreshToken);
-
         this.authService.storeToken(response.token); 
-        // -> now storing accesstoken & refreshtoken
-        // this.authService.storeAccessToken(response.accesstoken);
-        // this.authService.storeRefreshToken(response.refreshtoken);
-
         this.router.navigate(['/produits']);
       },
       error: (err) => {
