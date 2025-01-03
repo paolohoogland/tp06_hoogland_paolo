@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -19,8 +18,9 @@ export class AccountComponent implements OnInit {
   confirmPassword: string = '';
   errorMessage: string = '';
   successMessage: string = '';
+  originalUsername: string = '';
 
-  constructor(private authService: AuthService, private http: HttpClient, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadUserData();
@@ -29,33 +29,49 @@ export class AccountComponent implements OnInit {
   loadUserData(): void {
     const token = this.authService.getToken();
     if (token) {
-      // Decode token to get user info (if needed)
       const user = JSON.parse(atob(token.split('.')[1]));
       this.username = user.username;
+      this.originalUsername = user.username;
     }
   }
 
   onUpdate(): void {
-    if(this.password === '' || this.confirmPassword === '') {
-      this.errorMessage = 'Password and confirm password are required.';
-      return;
-    }
-
-    if (this.password !== this.confirmPassword) {
+    if (this.password && this.password !== this.confirmPassword) {
       this.errorMessage = 'Passwords do not match.';
       return;
     }
 
-    this.authService.updateAccount(this.username, this.password).subscribe({
+    const updatePayload: any = {};
+    
+    if (this.username && this.username !== this.originalUsername) {
+      updatePayload.username = this.username;
+    }
+    
+    if (this.password) {
+      updatePayload.password = this.password;
+    }
+
+    // check if there's anything to update
+    if (Object.keys(updatePayload).length === 0) {
+      this.errorMessage = 'No changes detected.';
+      return;
+    }
+
+    this.authService.updateAccount(updatePayload.username, updatePayload.password).subscribe({
       next: () => {
-        this.successMessage = 'Account updated successfully !';
+        this.successMessage = 'Account updated successfully!';
         this.errorMessage = '';
+        this.originalUsername = this.username;
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to update account.';
         this.successMessage = '';
       }
     });
+  }
 
+  clearMessages(): void {
+    this.successMessage = '';
+    this.errorMessage = '';
   }
 }

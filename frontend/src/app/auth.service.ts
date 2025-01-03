@@ -39,12 +39,7 @@ export class AuthService {
   }
 
   updateAccount(username: string, password: string): Observable<any> {
-    return this.http.put(`${this.usersUrl}/update`, { username, password }, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.getToken()}`
-      }
-    });
+    return this.http.put(`${this.usersUrl}/update`, { username, password }, {});
   }
 
   logout(): void {
