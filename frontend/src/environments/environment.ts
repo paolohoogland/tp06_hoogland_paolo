@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    backendProducts : "http://localhost:443/api/products",
-    backendUsers : "http://localhost:443/api/users",  
+    backendProducts : "https://cnamapp-nxz2.onrender.com/api/products",
+    backendUsers : "https://cnamapp-nxz2.onrender.com/api/users",  
   };
