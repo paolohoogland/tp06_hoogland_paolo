@@ -1,5 +1,7 @@
 export const environment = {
-    production: false,
-    backendProducts : "https://cnamapp-nxz2.onrender.com/api/products",
-    backendUsers : "https://cnamapp-nxz2.onrender.com/api/users",  
-  };
+  production: false,
+  backendProduct: 'https://cnamapp-nxz2.onrender.com/api/products',
+  backendRegister: 'https://cnamapp-nxz2.onrender.com/api/users/register',
+  backendLogin: 'https://cnamapp-nxz2.onrender.com/api/users/login',
+  backendUser: 'https://cnamapp-nxz2.onrender.com/api/users/user',
+};

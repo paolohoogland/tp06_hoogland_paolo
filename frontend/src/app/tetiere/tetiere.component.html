@@ -1,0 +1,13 @@
+<nav>
+    <div class = "nav_wrapper">
+        <a routerLink="boutique">Shop</a>
+        <div class="panier_nav_wrapper">
+            <p> {{nbProduits$ | async }}</p>
+            <a routerLink="panier">Cart</a>
+        </div>
+    </div>
+    
+    <div>
+        <app-auth></app-auth>
+    </div>
+</nav>

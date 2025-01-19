@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tp05_hoogland_paolo": {
+    "tp6_cfl": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tp05_hoogland_paolo",
+            "outputPath": "dist/tp6_cfl",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -25,18 +25,12 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "assets"
-              }
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
-            "prerender": false,
-            "ssr": false
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -66,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tp05_hoogland_paolo:build:production"
+              "buildTarget": "tp6_cfl:build:production"
             },
             "development": {
-              "buildTarget": "tp05_hoogland_paolo:build:development"
+              "buildTarget": "tp6_cfl:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -89,11 +83,6 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "assets"
               }
             ],
             "styles": [
@@ -104,5 +93,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

@@ -1,0 +1,30 @@
+.auth{
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.auth .auth-form{
+    display: flex;
+    flex-direction: row;
+}
+
+.dontgotoline{
+    white-space: nowrap;
+
+}
+
+.auth button.auth-logout{
+    margin-left: 10px;
+    background-color: #500500;
+}
+
+.auth button.auth-submit{
+    background-color: #3b00c4;
+}
+
+.auth button.auth-switch{
+    background-color: #313131;
+    margin-right: 5px;
+}

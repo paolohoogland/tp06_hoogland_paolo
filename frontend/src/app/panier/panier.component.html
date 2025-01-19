@@ -1,15 +1,74 @@
-<h1>Mon Panier</h1>
-
-<div *ngIf="(panier$ | async) as panier">
-  <div *ngIf="hasItems(panier); else emptyPanier">
-    <div *ngFor="let produit of panier" class="produitInPanier">
-      <p>{{ produit.product }} - {{ produit.price | currency }}</p>
-      <p>{{ produit.description }}</p>
-      <button (click)="retirerDuPanier(produit.id || '')">Retirer du Panier</button>
+<div class="panier_container">
+    <h2 class="panier_title">Your cart</h2>
+    <!-- Animation from https://frontendin.com/css-wave-text-effects/-->
+    <div class="wawing_text">
+        <span style="--i:1">D</span>
+        <span style="--i:2">i</span>
+        <span style="--i:3">d</span>
+        <span style="--i:4">n</span>
+        <span style="--i:5">'</span>
+        <span style="--i:6">t</span>
+        <span class="space" style="--i:7"> </span>
+        <span style="--i:8">h</span>
+        <span style="--i:9">a</span>
+        <span style="--i:10">v</span>
+        <span style="--i:11">e</span>
+        <span class="space" style="--i:12"> </span>
+        <span style="--i:13">t</span>
+        <span style="--i:14">i</span>
+        <span style="--i:15">m</span>
+        <span style="--i:16">e</span>
+        <span class="space" style="--i:17"> </span>
+        <span style="--i:18">t</span>
+        <span style="--i:19">o</span>
+        <span class="space" style="--i:20"> </span>
+        <span style="--i:21">l</span>
+        <span style="--i:22">i</span>
+        <span style="--i:23">n</span>
+        <span style="--i:24">k</span>
+        <span class="space" style="--i:25"> </span>
+        <span style="--i:26">p</span>
+        <span style="--i:27">a</span>
+        <span style="--i:28">n</span>
+        <span style="--i:29">i</span>
+        <span style="--i:30">e</span>
+        <span style="--i:31">r</span>
+        <span class="space" style="--i:32"> </span>
+        <span style="--i:33">a</span>
+        <span style="--i:34">n</span>
+        <span style="--i:35">d</span>
+        <span class="space" style="--i:36"> </span>
+        <span style="--i:37">u</span>
+        <span style="--i:38">s</span>
+        <span style="--i:39">e</span>
+        <span style="--i:40">r</span>
     </div>
-  </div>
+    <div class="panier_empty" *ngIf="(nbProduits$ | async) == 0">Your cart is empty</div>
+    <table class="panier_products" *ngIf="(nbProduits$ | async) != 0">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of panier$ | async">
+                <td>{{ item.product }}</td>
+                <td>{{ item.price }} {{ item.unit }}</td>
+                <td>
+                    <input type="number" min="1" max="100" [value]="item.quantity" #quantityInput />
+                    <button (click)="onSetQuantity(item, quantityInput.value)">Update</button>
+                </td>
+                <td>{{ (item.quantity * item.price).toFixed(2) }} {{ item.unit }}</td>
+                <td><button (click)="onRemoveFromCart(item)">Remove</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="panier_total" *ngIf="(nbProduits$ | async) != 0">
+        <div class="panier_total_title">Total</div>
+        <div class="panier_total_price">{{ total$ | async }}€</div>
+    </div>
 </div>
-
-<ng-template #emptyPanier>
-  <p>Panier vide</p>
-</ng-template>

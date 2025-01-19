@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex: 1;
+    max-width: max-content;
+}
+
+.left-pane, .right-pane {
+    flex: 1;
+    overflow: auto;
+}
+
+.divider {
+    width: 7px;
+    background-color: #ccc;
+    cursor: ew-resize;
+    position: relative;
+}
+
+.divider:hover {
+    background-color: #aaa;
+}
+
+.divider:active {
+    background-color: #888;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: #666;
+}
+
+body.resizing {
+    cursor: ew-resize;
+    user-select: none;
+}

@@ -1,0 +1,15 @@
+.filter_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+
+.filter_container select{
+    margin-right: 10px;
+    border-radius: 5px;
+    border: none;
+    height: 30px;
+}

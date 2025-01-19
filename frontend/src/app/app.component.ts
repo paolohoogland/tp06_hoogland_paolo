@@ -1,14 +1,22 @@
-import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./components/header/header.component";
+import { BoutiqueComponent } from './boutique/boutique.component';
+import { ApiService } from './api.service';
+
+import { Component, AfterViewInit, Renderer2 } from '@angular/core';
+import { TetiereComponent } from './tetiere/tetiere.component';
 
 @Component({
     selector: 'app-root',
-    standalone: true,
-    imports: [HeaderComponent, RouterOutlet],
+    imports: [RouterOutlet, TetiereComponent],
+    providers: [ApiService],
     templateUrl: './app.component.html',
-    styleUrl: './app.component.css'
+    styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'tp05_hoogland_paolo';
+export class AppComponent implements AfterViewInit {
+  title = 'TP6 - CFL';
+
+  constructor(private renderer: Renderer2) {}
+
+  ngAfterViewInit() {
+  }
 }

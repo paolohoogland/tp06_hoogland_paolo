@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'tp05_hoogland_paolo' title`, () => {
+  it(`should have the '6_cfl' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('tp05_hoogland_paolo');
+    expect(app.title).toEqual('tp6_cfl');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, tp05_hoogland_paolo');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, tp6_cfl');
   });
 });
