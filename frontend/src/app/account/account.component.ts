@@ -1,54 +1,76 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+import { Component, OnInit, Inject } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { UserState } from '../states/user.state';
-import { UpdatePseudo } from '../actions/user-action';
-import { Store } from '@ngxs/store';
 
 @Component({
-    selector: 'app-account',
-    imports: [CommonModule, FormsModule],
-    templateUrl: './account.component.html',
-    styleUrl: './account.component.css'
+  selector: 'app-account',
+  standalone: true,
+  templateUrl: './account.component.html',
+  styleUrls: ['./account.component.css'],
+  imports: [CommonModule, RouterModule, FormsModule]
 })
 export class AccountComponent implements OnInit {
-    email = '';
-    pseudo = '';
-    isEditing = false;
+  username: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  errorMessage: string = '';
+  successMessage: string = '';
+  originalUsername: string = '';
 
-    constructor(private apiService: ApiService, private store: Store) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit(): void {
+    this.loadUserData();
+  }
 
-    ngOnInit(): void {
-        this.loadUserInfo();
+  loadUserData(): void {
+    const token = this.authService.getToken();
+    if (token) {
+      const user = JSON.parse(atob(token.split('.')[1]));
+      this.username = user.username;
+      this.originalUsername = user.username;
+    }
+  }
+
+  onUpdate(): void {
+    if (this.password && this.password !== this.confirmPassword) {
+      this.errorMessage = 'Passwords do not match.';
+      return;
     }
 
-    loadUserInfo() {
-        // Fetch user info (mocked or real, replace with actual API call)
-        this.apiService.getCurrentUser().subscribe(
-            (user: any) => {
-                this.email = user.email;
-                this.pseudo = user.pseudo;
-            },
-            (error) => console.error('Error loading user info:', error)
-        );
+    const updatePayload: any = {};
+    
+    if (this.username && this.username !== this.originalUsername) {
+      updatePayload.username = this.username;
+    }
+    
+    if (this.password) {
+      updatePayload.password = this.password;
     }
 
-    saveChanges() {
-        const updatedUser = { email: this.email, pseudo: this.pseudo };
-        this.apiService.updateUser(updatedUser).subscribe(
-            (response) => {
-                console.log('User updated successfully:', response);
-                alert('User information updated!');
-                this.isEditing = false;
-                this.store.dispatch(new UpdatePseudo(this.pseudo));
-            },
-            (error) => console.error('Error updating user info:', error)
-        );
+    if (Object.keys(updatePayload).length === 0) {
+      this.errorMessage = 'No changes detected.';
+      return;
     }
 
-    toggleEdit() {
-        this.isEditing = !this.isEditing;
-    }
+    this.authService.updateAccount(updatePayload.username, updatePayload.password).subscribe({
+      next: () => {
+        this.successMessage = 'Account updated successfully!';
+        this.errorMessage = '';
+        this.originalUsername = this.username;
+      },
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Failed to update account.';
+        this.successMessage = '';
+      }
+    });
+  }
+
+  clearMessages(): void {
+    this.successMessage = '';
+    this.errorMessage = '';
+  }
 }

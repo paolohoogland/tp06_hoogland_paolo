@@ -1,0 +1,32 @@
+.produit-card {
+    margin: 10px;
+    width: 300px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.produit-card h3 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.produit-card p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.produit-card button {
+    background-color: #bb239d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.produit-card button:hover {
+    background-color: #951a7c;
+}

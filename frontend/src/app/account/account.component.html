@@ -1,29 +1,29 @@
-<div class="user-profile">
-    <h2>User Profile</h2>
-    <form *ngIf="!isEditing; else editTemplate">
-        <div>
-            <label>Email:</label>
-            <input type="text" [value]="email" disabled />
-        </div>
-        <div>
-            <label>Pseudo:</label>
-            <input type="text" [value]="pseudo" disabled />
-        </div>
-        <button type="button" (click)="toggleEdit()">Edit</button>
-    </form>
+<div class="account-container">
+  <h2>My Account</h2>
 
-    <ng-template #editTemplate>
-        <form (submit)="saveChanges()">
-            <div>
-                <label>Email:</label>
-                <input type="text" [(ngModel)]="email" name="email" required />
-            </div>
-            <div>
-                <label>Pseudo:</label>
-                <input type="text" [(ngModel)]="pseudo" name="pseudo" required />
-            </div>
-            <button type="submit">Save</button>
-            <button type="button" (click)="toggleEdit()">Cancel</button>
-        </form>
-    </ng-template>
+  <form (ngSubmit)="onUpdate()">
+    <div>
+      <label for="username">Username (optional):</label>
+      <input type="text" id="username" [(ngModel)]="username" name="username" (focus)="clearMessages()">
+    </div>
+
+    <div>
+      <label for="password">New Password (optional):</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" (focus)="clearMessages()">
+    </div>
+
+    <div>
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" (focus)="clearMessages()">
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="success">
+      {{ successMessage }}
+    </div>
+
+    <button type="submit">Update Account</button>
+  </form>
 </div>

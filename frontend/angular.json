@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tp6_cfl": {
+    "tp06_hoogland_paolo": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tp6_cfl",
+            "outputPath": "dist/tp06_hoogland_paolo",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tp6_cfl:build:production"
+              "buildTarget": "tp06_hoogland_paolo:build:production"
             },
             "development": {
-              "buildTarget": "tp6_cfl:build:development"
+              "buildTarget": "tp06_hoogland_paolo:build:development"
             }
           },
           "defaultConfiguration": "development"

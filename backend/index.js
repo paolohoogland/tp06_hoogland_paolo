@@ -17,8 +17,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 
 
-require('./routes/productRoutes') (app);
-require('./routes/userRoutes') (app);
+// require('./routes/productRoutes') (app);
+// require('./routes/userRoutes') (app);
+
+const db = require("./models");
+
+db.sequelize.sync()
+  .then(() => {
+    console.log("Synced db.");
+  })
+  .catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+  });
+
+require('./routes')(app);
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

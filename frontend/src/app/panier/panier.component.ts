@@ -1,40 +1,31 @@
-import { Component } from '@angular/core';
-import { Produit_panier } from '../models/produit_panier';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { PanierState } from '../states/panier.state';
 import { Observable } from 'rxjs';
-import { RemoveProduit, SetProduitQtt } from '../actions/panier-action';
+import { Produit } from '../../models/produits.model';
+import { PanierState, RetirerDuPanier } from '../store/panier/panier.state';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-panier',
-    imports: [CommonModule],
-    templateUrl: './panier.component.html',
-    styleUrl: './panier.component.css'
+  selector: 'app-panier',
+  standalone: true,
+  templateUrl: './panier.component.html',
+  styleUrls: ['./panier.component.css'],
+  imports: [CommonModule]
 })
-export class PanierComponent {
-  panier$: Observable<Produit_panier[]>;
-  nbProduits$: Observable<number>;
-  total$: Observable<number>;
+export class PanierComponent implements OnInit {
+  panier$!: Observable<Produit[]>;
 
-  constructor(private store: Store) {
-    this.panier$ = this.store.select(PanierState.getPanier);
-    this.nbProduits$ = this.store.select(PanierState.getNbProduits);
-    this.total$ = this.store.select(PanierState.getTotal);
-   }
+  constructor(private store: Store) {}
 
-  onRemoveFromCart(product: Produit_panier) {
-    this.store.dispatch(new RemoveProduit(product));
+  ngOnInit(): void {
+    this.panier$ = this.store.select(PanierState.getProduits);
   }
 
-  onSetQuantity(product: Produit_panier, quantity: string) {
-    const pr_panier = new Produit_panier();
-    pr_panier.product = product.product;
-    pr_panier.price = product.price;
-    pr_panier.unit = product.unit;
-    pr_panier.quantity = parseInt(quantity);
-    pr_panier.description = product.description;
+  retirerDuPanier(produitId: string) {
+    this.store.dispatch(new RetirerDuPanier(produitId));
+  }
 
-    this.store.dispatch(new SetProduitQtt(pr_panier));
+  hasItems(panier: any[] | null): boolean {
+    return panier !== null && panier.length > 0;
   }
 }
