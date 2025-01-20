@@ -15,4 +15,9 @@ export class ProduitService {
   getProduits(): Observable<Produit[]> {
     return this.http.get<Produit[]>(this.backendUrl);
   }
+
+  getFilteredProduits(searchTerm: string): Observable<Produit[]> {
+    const url = `${this.backendUrl}?search=${encodeURIComponent(searchTerm)}`;
+    return this.http.get<Produit[]>(url);
+  }
 }

@@ -1,5 +1,17 @@
 <h1>Catalogue des Produits</h1>
 
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    placeholder="Rechercher un produit..."
+    class="search-input"
+  />
+  <button (click)="onSearch()" class="search-button">Rechercher</button>
+  <button (click)="onReset()" class="search-button">Réinitialiser filtre</button>
+</div>
+
+
 <p>{{ (produits$ | async)?.length }} produits</p>
 <div *ngIf="(produits$ | async) as produits">
   <div *ngFor="let produit of produits" class="produit-card">

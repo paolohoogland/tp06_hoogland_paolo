@@ -3,7 +3,11 @@ const Products = db.products;
 const Op = db.Sequelize.Op;
 
 exports.getProducts = (req, res) => {
-    Products.findAll()
+    const search = req.query.search;
+
+    const condition = search ? { product: { [Op.iLike]: `%${search}%` } } : null;
+
+    Products.findAll({ where: condition })
     .then(data => {
         res.send(data);
     })
