@@ -1,0 +1,14 @@
+<h1>Liste des Cartes</h1>
+
+<div *ngIf="cartes().length === 0" class="no-cards">
+  <p>Pas de cartes existantes.</p>
+</div>
+
+<div *ngFor="let carte of cartes()" class="card-item">
+  <div class="card-details">
+    <p><strong>Nom :</strong> {{ carte.nomCarte }}</p>
+    <p><strong>Code :</strong> {{ carte.codeCarte | codeMasque }}</p>
+    <p><strong>Expiration :</strong> {{ carte.expiration }}</p>
+  </div>
+  <button (click)="deleteCarte(carte.id)" class="delete-button">🗑️ Supprimer</button>
+</div>

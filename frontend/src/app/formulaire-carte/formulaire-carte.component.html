@@ -1,0 +1,63 @@
+<h1>Formulaire pour ajouter une carte : </h1>
+
+<form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+  <label for="nomCarte">Nom de la carte :</label>
+  <input
+    id="nomCarte"
+    type="text"
+    formControlName="nomCarte"
+    placeholder="Paolo Hoogland"
+  />
+  <div class="error-container"> 
+    <!-- div pour gérer l'affichage des messages d'erreur -->
+     <!-- touched ne déclenche pas l'error checking, faut ajouter dirty -->
+    <div *ngIf="cardForm.get('nomCarte')?.invalid && (cardForm.get('nomCarte')?.dirty || cardForm.get('nomCarte')?.touched)" class="error">
+      <p *ngIf="cardForm.get('nomCarte')?.hasError('required')">Le nom de la carte est obligatoire.</p>
+      <p *ngIf="cardForm.get('nomCarte')?.hasError('pattern')">Le nom de la carte doit contenir uniquement des lettres et des espaces.</p>
+    </div>
+  </div>
+
+  <label for="codeCarte">Code de la carte :</label>
+  <input
+    id="codeCarte"
+    type="text"
+    formControlName="codeCarte"
+    placeholder="1234567890123456"
+  />
+  <div class="error-container">
+    <div *ngIf="cardForm.get('codeCarte')?.invalid && (cardForm.get('codeCarte')?.dirty || cardForm.get('codeCarte')?.touched)" class="error">
+      <p *ngIf="cardForm.get('codeCarte')?.hasError('required')">Le code de la carte est obligatoire.</p>
+      <p *ngIf="cardForm.get('codeCarte')?.hasError('pattern')">Le code de la carte doit contenir exactement 16 chiffres.</p>
+    </div>
+  </div>
+
+  <label for="ccv">CCV :</label>
+  <input
+    id="ccv"
+    type="text"
+    formControlName="ccv"
+    placeholder="123"
+  />
+  <div class="error-container">
+    <div *ngIf="cardForm.get('ccv')?.invalid && (cardForm.get('ccv')?.dirty || cardForm.get('ccv')?.touched)" class="error">
+      <p *ngIf="cardForm.get('ccv')?.hasError('required')">Le CCV est obligatoire.</p>
+      <p *ngIf="cardForm.get('ccv')?.hasError('pattern')">Le CCV doit contenir exactement 3 chiffres.</p>
+    </div>
+  </div>
+
+  <label for="expiration">Date d'expiration :</label>
+  <input
+    id="expiration"
+    type="text"
+    formControlName="expiration"
+    placeholder="MM/AA"
+  />
+  <div class="error-container">
+    <div *ngIf="cardForm.get('expiration')?.invalid && (cardForm.get('expiration')?.dirty || cardForm.get('expiration')?.touched)" class="error">
+      <p *ngIf="cardForm.get('expiration')?.hasError('required')">La date d'expiration est obligatoire.</p>
+      <p *ngIf="cardForm.get('expiration')?.hasError('pattern')">La date d'expiration doit être au format MM/AA.</p>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="cardForm.invalid">Enregistrer</button>
+</form>

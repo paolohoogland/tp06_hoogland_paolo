@@ -1,0 +1,41 @@
+
+  .no-cards {
+    font-size: 1.2em;
+    color: #888;
+    margin: 20px;
+  }
+  
+  .card-item {
+    margin: 10px auto;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .card-details {
+    margin-bottom: 15px;
+  }
+  
+  .card-details p {
+    font-size: 1.2em;
+    margin: 5px 0;
+  }
+  
+  .delete-button {
+    background-color: #bb239d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+  }
+  
+  .delete-button:hover {
+    background-color: #951a7c;
+  }
+  

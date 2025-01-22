@@ -1,0 +1,14 @@
+.error-container {
+    height: 20px; 
+    margin-top: 4px;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.9rem;
+  }
+  
+  .error p {
+    margin: 0;
+  }
+  
